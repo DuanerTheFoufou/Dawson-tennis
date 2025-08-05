@@ -138,13 +138,227 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .inspiration-section {
-    padding: 100px 0;
-    background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+    padding: 120px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     position: relative;
     overflow: hidden;
+}
+
+.inspiration-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.inspiration-container {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    position: relative;
+    z-index: 2;
+}
+
+.inspiration-image-container {
+    flex: 1;
+    position: relative;
+    animation: gentleBreathing 4s ease-in-out infinite;
+}
+
+.inspiration-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    filter: brightness(1.05) contrast(1.1);
+}
+
+.inspiration-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+    filter: brightness(1.1) contrast(1.15);
+}
+
+.inspiration-image::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, #007AFF, #5856D6, #FF2D92);
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.inspiration-image:hover::before {
+    opacity: 0.3;
+}
+
+.inspiration-content {
+    flex: 1;
+    padding: 40px;
+}
+
+.inspiration-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #007AFF, #5856D6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleGlow 3s ease-in-out infinite;
+}
+
+.quote {
+    margin: 40px 0;
+    position: relative;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.quote-icon {
+    font-size: 2rem;
+    color: #007AFF;
+    margin-bottom: 20px;
+    display: block;
+    animation: quotePulse 2s ease-in-out infinite;
+}
+
+.quote p {
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.author {
+    display: block;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    color: #007AFF;
+    font-weight: 600;
+    text-align: right;
+}
+
+.features {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    animation: featureSlide 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.feature:nth-child(1) { animation-delay: 0.2s; }
+.feature:nth-child(2) { animation-delay: 0.4s; }
+.feature:nth-child(3) { animation-delay: 0.6s; }
+
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 1);
+}
+
+.feature i {
+    font-size: 1.2rem;
+    color: #007AFF;
+}
+
+.feature span {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* Team Section */
+.team-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.team-button-container {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.team-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 40px;
+    background: linear-gradient(135deg, #007AFF, #5856D6);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.team-button:hover::before {
+    left: 100%;
+}
+
+.team-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 122, 255, 0.4);
+}
+
+.team-button i {
+    transition: transform 0.3s ease;
+}
+
+.team-button:hover i {
+    transform: translateX(5px);
+}
+
+.button-text {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .signup-section {
@@ -297,51 +511,6 @@ h1, h2, h3, h4, h5, h6 {
 .image-overlay.intense {
     opacity: 0.5;
     background: linear-gradient(135deg, rgba(0, 122, 255, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%);
-}
-
-.inspiration-content {
-    padding: 2rem 0;
-    position: relative;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.quote-icon {
-    font-size: 4rem;
-    color: var(--primary-color);
-    font-weight: 300;
-    line-height: 1;
-    margin-bottom: 1rem;
-    opacity: 0.3;
-    transition: all 0.6s ease;
-}
-
-.quote-icon.animate {
-    animation: quotePulse 3s ease-in-out infinite;
-}
-
-@keyframes quotePulse {
-    0%, 100% { 
-        opacity: 0.3;
-        transform: scale(1);
-    }
-    50% { 
-        opacity: 0.6;
-        transform: scale(1.1);
-    }
-}
-
-.inspiration-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
-    line-height: 1.2;
-    transition: all 0.6s ease;
-}
-
-.inspiration-title.highlight {
-    color: var(--primary-color);
-    text-shadow: 0 0 20px rgba(0, 122, 255, 0.3);
 }
 
 .inspiration-quote {
@@ -612,4 +781,35 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-color);
+} 
+
+/* Responsive Design for Inspiration Section */
+@media (max-width: 768px) {
+    .inspiration-container {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .inspiration-title {
+        font-size: 2.5rem;
+    }
+    
+    .quote p {
+        font-size: 1.2rem;
+    }
+    
+    .features {
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .feature {
+        padding: 12px 20px;
+    }
+    
+    .team-button {
+        padding: 18px 35px;
+        font-size: 1.1rem;
+    }
 } 
