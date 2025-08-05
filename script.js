@@ -222,10 +222,16 @@ function showNotification(message, type = 'info') {
         info: '#007AFF'
     };
     
+    // Responsive positioning
+    const isMobile = window.innerWidth <= 768;
+    const topPosition = isMobile ? '120px' : '150px';
+    const rightPosition = isMobile ? '10px' : '20px';
+    const maxWidth = isMobile ? 'calc(100vw - 20px)' : '400px';
+    
     notification.style.cssText = `
         position: fixed;
-        top: 100px;
-        right: 20px;
+        top: ${topPosition};
+        right: ${rightPosition};
         background: ${colors[type]};
         color: white;
         padding: 1rem 1.5rem;
@@ -234,7 +240,7 @@ function showNotification(message, type = 'info') {
         z-index: 1000;
         transform: translateX(100%);
         transition: transform 0.3s ease;
-        max-width: 400px;
+        max-width: ${maxWidth};
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     `;
     
