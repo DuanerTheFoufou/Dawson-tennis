@@ -112,15 +112,16 @@ window.addEventListener('scroll', function() {
 
 // Form validation and submission
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form[action*="formspree.io"]');
+    const form = document.getElementById('tennis-signup-form');
     if (form) {
         form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the redirect
+            
             // Basic validation
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             
             if (!data.name || !data.email || !data.age || !data.skill_level || !data.student_number || !data.participation_type) {
-                e.preventDefault();
                 showNotification('Please fill in all fields.', 'error');
                 return;
             }
@@ -128,7 +129,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(data.email)) {
-                e.preventDefault();
                 showNotification('Please enter a valid email address.', 'error');
                 return;
             }
@@ -136,7 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Age validation
             const age = parseInt(data.age);
             if (age < 16 || age > 100) {
-                e.preventDefault();
                 showNotification('Please enter a valid age between 16 and 100.', 'error');
                 return;
             }
@@ -147,8 +146,38 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
             
-            // Let the form submit naturally to Formspree
-            // Formspree will handle the redirect
+            // Submit to Formspree using fetch
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Success - show message and reset form
+                    showNotification('Thank you for your application! We\'ll be in touch soon.', 'success');
+                    form.reset();
+                    
+                    // Scroll to top of form section
+                    const signupSection = document.getElementById('signup');
+                    if (signupSection) {
+                        signupSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else {
+                    throw new Error('Submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Form submission error:', error);
+                showNotification('There was an error submitting your application. Please try again.', 'error');
+            })
+            .finally(() => {
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
         });
     }
 });
@@ -207,13 +236,14 @@ function showNotification(message, type = 'info') {
         setTimeout(() => notification.remove(), 300);
     });
     
-    // Auto remove after 5 seconds
+    // Auto remove after 8 seconds for success messages
+    const autoRemoveTime = type === 'success' ? 8000 : 5000;
     setTimeout(() => {
         if (notification.parentNode) {
             notification.style.transform = 'translateX(100%)';
             setTimeout(() => notification.remove(), 300);
         }
-    }, 5000);
+    }, autoRemoveTime);
 }
 
 // Intersection Observer for animations
