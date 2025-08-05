@@ -112,17 +112,15 @@ window.addEventListener('scroll', function() {
 
 // Form validation and submission
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('.signup-form');
+    const form = document.querySelector('form[action*="formspree.io"]');
     if (form) {
         form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
+            // Basic validation
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             
-            // Basic validation
             if (!data.name || !data.email || !data.age || !data.skill_level || !data.student_number || !data.participation_type) {
+                e.preventDefault();
                 showNotification('Please fill in all fields.', 'error');
                 return;
             }
@@ -130,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(data.email)) {
+                e.preventDefault();
                 showNotification('Please enter a valid email address.', 'error');
                 return;
             }
@@ -137,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Age validation
             const age = parseInt(data.age);
             if (age < 16 || age > 100) {
+                e.preventDefault();
                 showNotification('Please enter a valid age between 16 and 100.', 'error');
                 return;
             }
@@ -147,30 +147,8 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
             
-            // Submit to Formspree
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    showNotification('Thank you for your application! We\'ll be in touch soon.', 'success');
-                    form.reset();
-                } else {
-                    throw new Error('Submission failed');
-                }
-            })
-            .catch(error => {
-                console.error('Form submission error:', error);
-                showNotification('There was an error submitting your application. Please try again.', 'error');
-            })
-            .finally(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
+            // Let the form submit naturally to Formspree
+            // Formspree will handle the redirect
         });
     }
 });
