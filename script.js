@@ -110,7 +110,7 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Form validation
+// Form validation and submission
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.signup-form');
     if (form) {
@@ -123,31 +123,120 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Basic validation
             if (!data.name || !data.email || !data.age || !data.skill_level || !data.student_number || !data.participation_type) {
-                alert('Please fill in all fields.');
+                showNotification('Please fill in all fields.', 'error');
                 return;
             }
             
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(data.email)) {
-                alert('Please enter a valid email address.');
+                showNotification('Please enter a valid email address.', 'error');
                 return;
             }
             
             // Age validation
             const age = parseInt(data.age);
             if (age < 16 || age > 100) {
-                alert('Please enter a valid age between 16 and 100.');
+                showNotification('Please enter a valid age between 16 and 100.', 'error');
                 return;
             }
             
-            // Submit form (you'll need to replace YOUR_FORMSPREE_ENDPOINT with your actual endpoint)
-            // For now, we'll just show a success message
-            alert('Thank you for your application! We\'ll be in touch soon.');
-            form.reset();
+            // Show loading state
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Submit to Formspree
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    showNotification('Thank you for your application! We\'ll be in touch soon.', 'success');
+                    form.reset();
+                } else {
+                    throw new Error('Submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Form submission error:', error);
+                showNotification('There was an error submitting your application. Please try again.', 'error');
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
         });
     }
 });
+
+// Notification system
+function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
+    
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-message">${message}</span>
+            <button class="notification-close">&times;</button>
+        </div>
+    `;
+    
+    // Add styles
+    const colors = {
+        success: '#34C759',
+        error: '#FF3B30',
+        info: '#007AFF'
+    };
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${colors[type]};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        max-width: 400px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Close button functionality
+    const closeBtn = notification.querySelector('.notification-close');
+    closeBtn.addEventListener('click', () => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => notification.remove(), 300);
+    });
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => notification.remove(), 300);
+        }
+    }, 5000);
+}
 
 // Intersection Observer for animations
 const observerOptions = {
