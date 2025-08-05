@@ -113,9 +113,15 @@ window.addEventListener('scroll', function() {
 // Form validation and submission
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('tennis-signup-form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent the redirect
+    const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+    
+    if (form && submitBtn) {
+        // Handle button click instead of form submission
+        submitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Submit button clicked'); // Debug log
             
             // Basic validation
             const formData = new FormData(form);
@@ -123,28 +129,29 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!data.name || !data.email || !data.age || !data.skill_level || !data.student_number || !data.participation_type) {
                 showNotification('Please fill in all fields.', 'error');
-                return;
+                return false;
             }
             
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(data.email)) {
                 showNotification('Please enter a valid email address.', 'error');
-                return;
+                return false;
             }
             
             // Age validation
             const age = parseInt(data.age);
             if (age < 16 || age > 100) {
                 showNotification('Please enter a valid age between 16 and 100.', 'error');
-                return;
+                return false;
             }
             
             // Show loading state
-            const submitBtn = form.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
+            
+            console.log('Submitting form data:', data); // Debug log
             
             // Submit to Formspree using fetch
             fetch(form.action, {
@@ -155,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .then(response => {
+                console.log('Formspree response:', response); // Debug log
                 if (response.ok) {
                     // Success - show message and reset form
                     showNotification('Thank you for your application! We\'ll be in touch soon.', 'success');
@@ -178,6 +186,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
             });
+            
+            return false;
+        });
+        
+        // Also prevent form submission as backup
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
         });
     }
 });
