@@ -224,7 +224,7 @@ function showNotification(message, type = 'info') {
     
     notification.style.cssText = `
         position: fixed;
-        top: 20px;
+        top: 100px;
         right: 20px;
         background: ${colors[type]};
         color: white;
