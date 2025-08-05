@@ -1,0 +1,615 @@
+/* Apple-inspired Minimalist Design */
+:root {
+    --primary-color: #007AFF;
+    --secondary-color: #8E8E93;
+    --background-color: #FFFFFF;
+    --text-color: #1D1D1F;
+    --light-gray: #F2F2F7;
+    --border-color: #E5E5EA;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Navigation */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+    transition: var(--transition);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-color) !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-color) !important;
+    margin: 0 1rem;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 120px 0 80px;
+    background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--text-color) 0%, var(--primary-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+}
+
+.hero-buttons {
+    margin-top: 2rem;
+}
+
+.hero-image img {
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.hero-image img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Buttons */
+.btn {
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 12px;
+    transition: var(--transition);
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0056CC;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3);
+}
+
+.btn-outline-secondary {
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    background: transparent;
+}
+
+.btn-outline-secondary:hover {
+    background: var(--light-gray);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Sections */
+.about-section {
+    padding: 100px 0;
+    background: var(--background-color);
+}
+
+.inspiration-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.signup-section {
+    padding: 100px 0;
+    background: var(--background-color);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+/* Feature Cards */
+.feature-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+    border: 1px solid var(--border-color);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.feature-card p {
+    color: var(--secondary-color);
+    line-height: 1.6;
+}
+
+/* Affiliation Card */
+.affiliation-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    margin-top: 2rem;
+}
+
+.affiliation-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.affiliation-card ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.affiliation-card li {
+    padding: 0.5rem 0;
+    color: var(--secondary-color);
+}
+
+.affiliation-card strong {
+    color: var(--text-color);
+}
+
+/* Roger Federer Inspiration Section */
+.federer-image-container {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    transform: translateY(0);
+}
+
+.federer-image-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.federer-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: scale(1);
+    filter: brightness(1);
+}
+
+/* Breathing animation for the image */
+@keyframes gentleBreathing {
+    0%, 100% { 
+        transform: scale(1) translateY(0);
+        filter: brightness(1);
+    }
+    50% { 
+        transform: scale(1.02) translateY(-2px);
+        filter: brightness(1.05);
+    }
+}
+
+.federer-image.breathing {
+    animation: gentleBreathing 4s ease-in-out infinite;
+}
+
+/* Parallax effect on scroll */
+.federer-image-container.parallax {
+    transform: translateY(var(--parallax-offset, 0));
+}
+
+/* Subtle glow effect on scroll */
+.federer-image-container.glow {
+    box-shadow: 0 20px 40px rgba(0, 122, 255, 0.15);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%);
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    opacity: 0.3;
+}
+
+.image-overlay.intense {
+    opacity: 0.5;
+    background: linear-gradient(135deg, rgba(0, 122, 255, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.inspiration-content {
+    padding: 2rem 0;
+    position: relative;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.quote-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+    transition: all 0.6s ease;
+}
+
+.quote-icon.animate {
+    animation: quotePulse 3s ease-in-out infinite;
+}
+
+@keyframes quotePulse {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+.inspiration-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    line-height: 1.2;
+    transition: all 0.6s ease;
+}
+
+.inspiration-title.highlight {
+    color: var(--primary-color);
+    text-shadow: 0 0 20px rgba(0, 122, 255, 0.3);
+}
+
+.inspiration-quote {
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    font-style: italic;
+    position: relative;
+    padding-left: 1rem;
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.6s ease;
+}
+
+.inspiration-quote.emphasize {
+    color: var(--text-color);
+    border-left-width: 6px;
+    padding-left: 1.5rem;
+}
+
+.quote-author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    transition: all 0.6s ease;
+}
+
+.author-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: all 0.6s ease;
+}
+
+.author-title {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    font-weight: 500;
+    transition: all 0.6s ease;
+}
+
+.quote-author.highlight .author-name {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.inspiration-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inspiration-feature {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 122, 255, 0.05);
+    border-radius: 12px;
+    border-left: 3px solid var(--primary-color);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateX(0);
+}
+
+.inspiration-feature:hover {
+    background: rgba(0, 122, 255, 0.1);
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.1);
+}
+
+.inspiration-feature.animate {
+    animation: featureSlide 0.6s ease-out;
+}
+
+@keyframes featureSlide {
+    0% { 
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% { 
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.inspiration-feature .feature-icon {
+    font-size: 1.5rem;
+    margin: 0;
+    transition: all 0.4s ease;
+}
+
+.inspiration-feature:hover .feature-icon {
+    transform: scale(1.2);
+}
+
+/* Sign Up Form */
+.signup-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.form-control, .form-select {
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    transition: var(--transition);
+    background: white;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: var(--secondary-color);
+}
+
+/* Footer */
+.footer {
+    background: var(--light-gray);
+    padding: 3rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer h5 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.footer p {
+    color: var(--secondary-color);
+    margin-bottom: 0;
+}
+
+.affiliation-text {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .inspiration-title {
+        font-size: 2rem;
+    }
+    
+    .signup-card {
+        padding: 2rem;
+        margin: 0 1rem;
+    }
+    
+    .hero-buttons .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-buttons .btn:last-child {
+        margin-bottom: 0;
+    }
+    
+    .navbar-nav {
+        text-align: center;
+        margin-top: 1rem;
+    }
+    
+    .nav-link {
+        margin: 0.5rem 0;
+    }
+    
+    .inspiration-content {
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+    
+    .inspiration-features {
+        align-items: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        padding: 100px 0 60px;
+    }
+    
+    .about-section, .signup-section, .inspiration-section {
+        padding: 60px 0;
+    }
+    
+    .feature-card {
+        margin-bottom: 2rem;
+    }
+    
+    .inspiration-title {
+        font-size: 1.8rem;
+    }
+    
+    .inspiration-quote {
+        font-size: 1.1rem;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-section, .about-section, .inspiration-section, .signup-section {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-color);
+} 
