@@ -224,7 +224,7 @@ function showNotification(message, type = 'info') {
     
     // Responsive positioning
     const isMobile = window.innerWidth <= 768;
-    const topPosition = isMobile ? '170px' : '200px';
+    const topPosition = isMobile ? '220px' : '250px';
     const rightPosition = isMobile ? '10px' : '20px';
     const maxWidth = isMobile ? 'calc(100vw - 20px)' : '400px';
     
