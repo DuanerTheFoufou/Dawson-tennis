@@ -537,6 +537,35 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Center hero content and make buttons consistent on iPhone */
+    .hero-section .row .col-lg-6:first-child {
+        text-align: center;
+    }
+
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-top: 1.25rem;
+    }
+
+    .hero-buttons .btn {
+        display: inline-block;
+        width: 100%;
+        max-width: 420px;
+        margin: 0;
+    }
+
+    /* Remove desktop spacing class when stacked */
+    .hero-buttons .ms-3 {
+        margin-left: 0 !important;
+    }
+
+    /* Add breathing room on mobile */
+    .section-subtitle {
+        margin-bottom: 2.75rem;
+    }
     .hero-title {
         font-size: 2.5rem;
     }
