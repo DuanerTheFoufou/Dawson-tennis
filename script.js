@@ -12,7 +12,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background on scroll
+// Navbar background on scroll (skip heavy effects on touch devices)
+const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
@@ -26,6 +28,7 @@ window.addEventListener('scroll', function() {
 
 // Roger Federer scroll animations
 window.addEventListener('scroll', function() {
+    if (isTouchDevice) return; // lighten work on iPhone
     const federerContainer = document.querySelector('.federer-image-container');
     const federerImage = document.querySelector('.federer-image');
     const imageOverlay = document.querySelector('.image-overlay');

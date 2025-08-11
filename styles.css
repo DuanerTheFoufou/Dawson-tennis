@@ -24,6 +24,22 @@ body {
     overflow-x: hidden;
 }
 
+/* iPhone safe-area support (no desktop change) */
+.navbar {
+    padding-top: calc(1rem + env(safe-area-inset-top));
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+.footer {
+    padding-top: calc(3rem + env(safe-area-inset-top));
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom));
+}
+
+.signup-section, .hero-section, .about-section, .inspiration-section {
+    padding-left: calc(0px + env(safe-area-inset-left));
+    padding-right: calc(0px + env(safe-area-inset-right));
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
@@ -106,6 +122,18 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
     text-decoration: none;
     display: inline-block;
+}
+
+/* Larger touch targets on small iPhones */
+@media (max-width: 390px) {
+    .btn {
+        padding: 14px 32px;
+        font-size: 1.05rem;
+    }
+    .form-control, .form-select {
+        padding: 14px 16px;
+        font-size: 1.05rem;
+    }
 }
 
 .btn-primary {
@@ -452,6 +480,12 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
 }
 
+.tryouts-note {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1.75rem;
+}
+
 .form-label {
     font-weight: 600;
     color: var(--text-color);
@@ -523,6 +557,11 @@ h1, h2, h3, h4, h5, h6 {
         padding: 2rem;
         margin: 0 1rem;
     }
+    /* Prevent sticky hover on touch */
+    .btn:hover {
+        transform: none;
+        box-shadow: none;
+    }
     
     .hero-buttons .btn {
         display: block;
@@ -572,6 +611,20 @@ h1, h2, h3, h4, h5, h6 {
     
     .inspiration-quote {
         font-size: 1.1rem;
+    }
+    /* Make navbar toggler easier to tap */
+    .navbar-toggler {
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+    }
+}
+
+/* Respect reduced motion for iOS accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
     }
 }
 
